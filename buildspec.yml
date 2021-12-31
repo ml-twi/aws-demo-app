@@ -14,8 +14,8 @@ phases:
         - $(aws ecr get-login --no-include-email)
   build:
     commands:
-      - docker build -t $REPO/aws-demo-app:$TAG .
+      - docker build -t $REPO:$TAG .
 
   post_build:
     commands:
-      - docker push $REPO/aws-demo-app:$TAG
+      - docker push $REPO:$TAG
