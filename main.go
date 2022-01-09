@@ -24,7 +24,7 @@ const (
 	// the Pod IP being removed from the Service's Endpoint list, which prevents traffic from being
 	// directed to terminated pods, which otherwise would cause timeout errors and/or request delays.
 	// See: https://github.com/kubernetes/ingress-nginx/issues/3335#issuecomment-434970950
-	defaultTerminationDelay = 10
+	defaultTerminationDelay = 30
 )
 
 var (
