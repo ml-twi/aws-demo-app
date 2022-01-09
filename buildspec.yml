@@ -1,8 +1,13 @@
 ---
 version: 0.2
+env:
+  git-credential-helper: yes
 phases:
   install:
     commands:
+      - ls
+      - ls $CODEBUILD_SRC_DIR_deployCode
+      - env
       - curl -sS -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/amd64/aws-iam-authenticator
       - chmod +x ./aws-iam-authenticator
       - export PATH=$PWD/:$PATH
