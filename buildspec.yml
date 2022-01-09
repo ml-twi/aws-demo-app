@@ -14,7 +14,7 @@ phases:
         - $(aws ecr get-login --no-include-email)
   build:
     commands:
-      - docker build --build-arg COLOR=green --build-arg ERROR_RATE= --build-arg LATENCY= -t $REPO:$TAG .
+      - docker build --build-arg COLOR=orange --build-arg ERROR_RATE= --build-arg LATENCY= -t $REPO:$TAG .
 
   post_build:
     commands:
