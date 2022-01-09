@@ -26,6 +26,8 @@ phases:
       # - docker push $REPO:$TAG
       - cd $CODEBUILD_SRC_DIR_deployCode
       - ls
+      - git config --global user.email "codebuild@aws.com"
+      - git config --global user.name "CodeBuild"
       - sed "s#image:\ $REPO:.*#image:\ $REPO:$TAG#g" ./canary/canary-rollout.yaml > ./canary/canary-rollout.yaml
       - git commit -am "version update to $REPO:$TAG"
       - git push origin test
