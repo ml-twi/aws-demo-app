@@ -25,6 +25,6 @@ phases:
     commands:
       - docker push $REPO:$TAG
       - cd $CODEBUILD_SRC_DIR_deployCode
-      - sed -i '' "s/image: $REPO:.*/image: $REPO:$TAG/g" canary/canary-rollout.yaml
-      - git commit -am "version update to $REPO:$TAG"
-      - git push origin test
+      # - sed -i '' "s/image: $REPO:.*/image: $REPO:$TAG/g" canary/canary-rollout.yaml
+      # - git commit -am "version update to $REPO:$TAG"
+      # - git push origin test
