@@ -19,12 +19,13 @@ phases:
         - $(aws ecr get-login --no-include-email)
   build:
     commands:
-      - docker build --build-arg COLOR=orange --build-arg ERROR_RATE= --build-arg LATENCY= -t $REPO:$TAG .
+      - docker build --build-arg COLOR=orange --build-arg ERROR_RATE=0 --build-arg LATENCY=0 -t $REPO:$TAG .
 
   post_build:
     commands:
       - docker push $REPO:$TAG
-      - cd $CODEBUILD_SRC_DIR_deployCode 
+      - cd $CODEBUILD_SRC_DIR_deployCode
+      - ls
       - sed -i '' "s/image:\ $REPO:.*/image:\ $REPO:$TAG/g" canary/canary-rollout.yaml
       - git commit -am "version update to $REPO:$TAG"
       - git push origin test
