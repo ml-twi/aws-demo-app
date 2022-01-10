@@ -5,9 +5,6 @@ env:
 phases:
   install:
     commands:
-      - ls
-      - ls $CODEBUILD_SRC_DIR_deployCode
-      - env
       - curl -sS -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/amd64/aws-iam-authenticator
       - chmod +x ./aws-iam-authenticator
       - export PATH=$PWD/:$PATH
@@ -19,16 +16,14 @@ phases:
         - $(aws ecr get-login --no-include-email)
   build:
     commands:
-      - docker build --build-arg COLOR=orange --build-arg ERROR_RATE=10 --build-arg LATENCY=0 -t $REPO:$TAG .
+      - docker build --build-arg COLOR=yellow --build-arg ERROR_RATE=1 --build-arg LATENCY=0 -t $REPO:$TAG .
 
   post_build:
     commands:
       - docker push $REPO:$TAG
       - cd $CODEBUILD_SRC_DIR_deployCode
-      - ls
       - git config --global user.email "codebuild@aws.com"
       - git config --global user.name "CodeBuild"
-      - git branch
       - git checkout test
       - sed -i -e "s#image:\ $REPO:.*#image:\ $REPO:$TAG#g" ./canary/canary-rollout.yaml
       - sed -i -E -e "s#value:\ [a-z0-9]{8}\$#value:\ $TAG#g" ./canary/post-job.yaml
