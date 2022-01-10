@@ -1,4 +1,4 @@
-FROM golang:1.16 as build
+FROM public.ecr.aws/docker/library/golang:1.16 as build
 WORKDIR /go/src/app
 COPY . .
 RUN make
