@@ -31,5 +31,6 @@ phases:
       - git branch
       - git checkout test
       - sed -i -e "s#image:\ $REPO:.*#image:\ $REPO:$TAG#g" ./canary/canary-rollout.yaml
+      - sed -i -e "s#SED_TAG\n\ \ \ \ \ \ \ \ \ \ \ \ value:.*#SED_TAG\n\ \ \ \ \ \ \ \ \ \ \ \ value:\ $TAG#g#g" ./canary/post-job.yaml
       - git commit -am "version update to $REPO:$TAG"
       - git push origin test
